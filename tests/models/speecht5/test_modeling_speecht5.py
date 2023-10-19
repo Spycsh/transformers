@@ -1028,7 +1028,7 @@ class SpeechT5ForTextToSpeechIntegrationTests(unittest.TestCase):
         input_ids = processor(text=input_text, return_tensors="pt").input_ids.to(torch_device)
 
         generated_speech = model.generate_speech(input_ids, speaker_embeddings=speaker_embeddings)
-        self.assertEqual(generated_speech.shape, (228, model.config.num_mel_bins))
+        self.assertEqual(generated_speech.shape, (230, model.config.num_mel_bins))
 
         set_seed(555)  # make deterministic
 
@@ -1036,7 +1036,7 @@ class SpeechT5ForTextToSpeechIntegrationTests(unittest.TestCase):
         generated_speech_with_generate = model.generate(
             input_ids, attention_mask=None, speaker_embeddings=speaker_embeddings
         )
-        self.assertEqual(generated_speech_with_generate.shape, (228, model.config.num_mel_bins))
+        self.assertEqual(generated_speech_with_generate.shape, (230, model.config.num_mel_bins))
 
     def test_batch_generation(self):
         model = self.default_model

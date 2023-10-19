@@ -2570,8 +2570,6 @@ def _generate_speech(
 
     bsz = input_values.size(0)
 
-    encoder_attention_mask = torch.ones_like(input_values)
-
     encoder_out = model.speecht5.encoder(
         input_values=input_values,
         attention_mask=encoder_attention_mask,
@@ -2912,8 +2910,8 @@ class SpeechT5ForTextToSpeech(SpeechT5PreTrainedModel):
         return _generate_speech(
             self,
             input_ids,
-            attention_mask,
             speaker_embeddings,
+            attention_mask,
             threshold,
             minlenratio,
             maxlenratio,
