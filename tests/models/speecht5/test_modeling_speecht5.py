@@ -1057,6 +1057,7 @@ class SpeechT5ForTextToSpeechIntegrationTests(unittest.TestCase):
             input_ids=inputs["input_ids"],
             speaker_embeddings=speaker_embeddings,
             attention_mask=inputs["attention_mask"],
+            return_concrete_lengths=True,
         )
         self.assertEqual(spectrograms.shape, (3, 262, model.config.num_mel_bins))
         waveforms = vocoder(spectrograms)
@@ -1069,6 +1070,7 @@ class SpeechT5ForTextToSpeechIntegrationTests(unittest.TestCase):
             speaker_embeddings=speaker_embeddings,
             attention_mask=inputs["attention_mask"],
             vocoder=vocoder,
+            return_concrete_lengths=True,
         )
         self.assertTrue(torch.allclose(waveforms, waveforms_with_vocoder, atol=1e-8))
         self.assertEqual(waveform_lengths, waveform_lengths_with_vocoder)
